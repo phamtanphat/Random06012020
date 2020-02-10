@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"/>
 
     <EditText
+        android:maxLength="6"
         android:id="@+id/edtSomin"
         android:hint="Nhập số min"
         android:inputType="number"
@@ -27,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
+        android:maxLength="6"
         android:id="@+id/edtSomax"
         android:hint="Nhập số max"
         android:inputType="number"
