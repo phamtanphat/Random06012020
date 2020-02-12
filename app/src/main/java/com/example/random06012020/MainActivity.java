@@ -10,13 +10,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText mEdtSomin,mEdtSomax;
-    Button mBtnRandom;
+    Button mBtnRandom,mBtnResetRange,mBtnAddRange;
     TextView mTvKetqua;
+    int[] arrayRange;
+    Random random = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         mEdtSomin = findViewById(R.id.edtSomin);
         mBtnRandom = findViewById(R.id.btnRandom);
         mTvKetqua = findViewById(R.id.tvKetqua);
-
+        mBtnResetRange = findViewById(R.id.btnResetRange);
+        mBtnAddRange = findViewById(R.id.btnRange);
         // Task 1 : Kiểm tra có dữ liệu trong 2 Edittext hay không
         // Task 2 : Nếu số max < số min , số max = smin + 1;
         // Task 3 : Click button random trả về số trong khoản min và max
@@ -41,18 +45,29 @@ public class MainActivity extends AppCompatActivity {
 //                + Xóa các phần tử trong mảng
 //                + Bật tính năng lại cho edittext và button
 //                + Xóa dữ liệu kết quả cũ nếu có
-//
         // Button : Random
 //                + Lấy giá trị random được hiển thị lên trên text
 //                + Hiện thị theo format ( 5 - 9 - 10 - 9)
 //                + Nếu hết số random thì báo cho người dùng biết
         // ctrl + spacebar : gợi ý code
-        mBtnRandom.setOnClickListener(new View.OnClickListener() {
+
+        ArrayList<Integer> array = new ArrayList<>();
+
+        // Thêm dữ liệu vào mảng
+        array.add(1);
+        array.add(2);
+        array.add(5);
+        // Xóa phần tử
+        array.remove(0);
+        // Chỉnh sửa
+        array.set(0 , 10);
+        Log.d("BBB",array.size() + "");
+
+        mBtnAddRange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String textSmin = mEdtSomin.getText().toString();
                 String textSmax = mEdtSomax.getText().toString();
-
                 if (textSmax.isEmpty() || textSmin.isEmpty()){
                     Toast.makeText(MainActivity.this, "Bạn chưa nhập đủ thông tin", Toast.LENGTH_SHORT).show();
                     return;
@@ -65,10 +80,24 @@ public class MainActivity extends AppCompatActivity {
                     somax = somin + 1;
                     mEdtSomax.setText(somax + "");
                 }
+                arrayRange = new int[somax - somin + 1];
+                int count = somin;
+                for (int i = 0 ; i < arrayRange.length; i++){
+                    arrayRange[i] = count++;
+                }
+                mEdtSomax.setEnabled(false);
+                mEdtSomin.setEnabled(false);
+                mBtnAddRange.setEnabled(false);
+            }
+        });
+        mBtnRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int index = random.nextInt(arrayRange.length);
+                int value = arrayRange[index];
 
-                Random random = new Random();
-                int value = random.nextInt(somax - somin + 1 ) + somin;
                 mTvKetqua.append(value + " - ");
+
             }
         });
     }
