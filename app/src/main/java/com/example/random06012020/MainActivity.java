@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     EditText mEdtSomin,mEdtSomax;
     Button mBtnRandom;
     TextView mTvKetqua;
+    String mKetqua = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         // Task 2 : Nếu số max < số min , số max = smin + 1;
         // Task 3 : Click button random trả về số trong khoản min và max
         // Task 4 : Nối chuỗi dữ liệu các giá trị random (5 - 3 - 2 - 1 -)
-
         // ctrl + spacebar : gợi ý code
         mBtnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if (somax <= somin){
                     somax = somin + 1;
+                    mEdtSomax.setText(somax + "");
                 }
 
+                Random random = new Random();
+                int value = random.nextInt(somax - somin + 1 ) + somin;
+                mKetqua += value + " - ";
+                mTvKetqua.setText(mKetqua);
 
             }
         });
