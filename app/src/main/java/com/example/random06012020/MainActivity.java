@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     mEdtSomax.setText(somax + "");
                 }
                 int count = somin;
-                for (int i = 0 ; i < arrayRange.size() ; i++){
+                for (int i = 0 ; i <= (somax - somin) ; i++){
                     arrayRange.add(count++);
                 }
                 mEdtSomax.setEnabled(false);
