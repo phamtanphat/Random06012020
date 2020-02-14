@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     EditText mEdtSomin,mEdtSomax;
     Button mBtnRandom,mBtnResetRange,mBtnAddRange;
     TextView mTvKetqua;
-    int[] arrayRange;
     Random random = new Random();
+    ArrayList<Integer> arrayRange = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,17 +51,6 @@ public class MainActivity extends AppCompatActivity {
 //                + Nếu hết số random thì báo cho người dùng biết
         // ctrl + spacebar : gợi ý code
 
-        ArrayList<Integer> array = new ArrayList<>();
-
-        // Thêm dữ liệu vào mảng
-        array.add(1);
-        array.add(2);
-        array.add(5);
-        // Xóa phần tử
-        array.remove(0);
-        // Chỉnh sửa
-        array.set(0 , 10);
-        Log.d("BBB",array.size() + "");
 
         mBtnAddRange.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,10 +69,9 @@ public class MainActivity extends AppCompatActivity {
                     somax = somin + 1;
                     mEdtSomax.setText(somax + "");
                 }
-                arrayRange = new int[somax - somin + 1];
                 int count = somin;
-                for (int i = 0 ; i < arrayRange.length; i++){
-                    arrayRange[i] = count++;
+                for (int i = 0 ; i < arrayRange.size() ; i++){
+                    arrayRange.add(count++);
                 }
                 mEdtSomax.setEnabled(false);
                 mEdtSomin.setEnabled(false);
@@ -93,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         mBtnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int index = random.nextInt(arrayRange.length);
-                int value = arrayRange[index];
+                int index = random.nextInt(arrayRange.size());
+                int value = arrayRange.get(index);
 
                 mTvKetqua.append(value + " - ");
 
