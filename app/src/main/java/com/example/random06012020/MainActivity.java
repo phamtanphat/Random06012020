@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     TextView mTvKetqua;
     Random random = new Random();
     ArrayList<Integer> arrayRange = new ArrayList<>();
+    String mValueText = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,14 +86,16 @@ public class MainActivity extends AppCompatActivity {
                     int index = random.nextInt(arrayRange.size());
                     int value = arrayRange.get(index);
 
-                    mTvKetqua.append(value + " - ");
+                    if (arrayRange.size() == 1){
+                        mValueText += value;
+                    }else{
+                        mValueText +=  value + " - ";
+                    }
+                    mTvKetqua.setText(mValueText);
                     arrayRange.remove(index);
                 }else{
                     Toast.makeText(MainActivity.this, "Kết thúc", Toast.LENGTH_SHORT).show();
                 }
-
-                // Xóa giá trị vừa random xog
-                // Nếu hết số random thì không random nữa mà thông báo hết số hoặc kết thúc
 
             }
         });
