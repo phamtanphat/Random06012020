@@ -81,10 +81,18 @@ public class MainActivity extends AppCompatActivity {
         mBtnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int index = random.nextInt(arrayRange.size());
-                int value = arrayRange.get(index);
+                if (arrayRange.size() >0){
+                    int index = random.nextInt(arrayRange.size());
+                    int value = arrayRange.get(index);
 
-                mTvKetqua.append(value + " - ");
+                    mTvKetqua.append(value + " - ");
+                    arrayRange.remove(index);
+                }else{
+                    Toast.makeText(MainActivity.this, "Kết thúc", Toast.LENGTH_SHORT).show();
+                }
+
+                // Xóa giá trị vừa random xog
+                // Nếu hết số random thì không random nữa mà thông báo hết số hoặc kết thúc
 
             }
         });
